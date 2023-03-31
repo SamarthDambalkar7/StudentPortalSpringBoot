@@ -58,6 +58,12 @@
 		<repository>
 			<id>com.learning.mongodbatlas</id>
 			<url>https://maven.pkg.github.com/SamarthDambalkar7/StudentPortalSpringBoot</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
 		</repository>
 	</distributionManagement>
 
