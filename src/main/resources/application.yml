@@ -1,0 +1,7 @@
+spring:
+    data:
+        mongodb:
+            uri: mongodb+srv://Samarth:Samarth123@studentportal.gbms3kz.mongodb.net/?retryWrites=true&w=majority
+            database: StudentPortal
+
+
