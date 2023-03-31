@@ -65,10 +65,6 @@
 				<enabled>true</enabled>
 			</snapshots>
 		</repository>
-		<snapshotRepository>
-			<id>github</id>
-			<url>https://maven.pkg.github.com/SamarthDambalkar7/StudentPortalSpringBoot/</url>
-		</snapshotRepository>
 	</distributionManagement>
 
 	<build>
