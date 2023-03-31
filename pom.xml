@@ -56,7 +56,7 @@
 
 	<distributionManagement>
 		<repository>
-			<id>com.learning.mongodbatlas</id>
+			<id>github</id>
 			<url>https://maven.pkg.github.com/SamarthDambalkar7/StudentPortalSpringBoot</url>
 			<releases>
 				<enabled>true</enabled>
