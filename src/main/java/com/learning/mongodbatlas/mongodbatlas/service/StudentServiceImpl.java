@@ -75,11 +75,20 @@ public class StudentServiceImpl implements StudentService {
         // Set subjects according to std
         student.setSubjects(curriculumRepository.findById(student.getStd()).get().getSubjects());
 
-        // Set Notes according to subjects / std
+        // Map to be set in student
         LinkedHashMap<Subjects, LinkedList<Notes>> notesMap = new LinkedHashMap<>();
 
         for (Subjects subject : student.getSubjects()) {
-            notesMap.put(subject, new LinkedList<>());
+            // default new note object
+            Notes defaultnote = new Notes();
+
+            // Set Notes according to subjects / std
+            LinkedList<Notes> defaultNotes = new LinkedList<>();
+            defaultnote.setDate("");
+            defaultnote.setTitle("These are your Pinned notes for :" + subject.name());
+            defaultnote.setContent("");
+            defaultNotes.add(defaultnote);
+            notesMap.put(subject, defaultNotes);
         }
         student.setNotes(notesMap);
 
@@ -150,7 +159,6 @@ public class StudentServiceImpl implements StudentService {
                 note.setTitle(notes.getTitle());
             } else {
                 notesToAdd.add(notes);
-
             }
         }
         notesMap.get(subjects).addAll(notesToAdd);

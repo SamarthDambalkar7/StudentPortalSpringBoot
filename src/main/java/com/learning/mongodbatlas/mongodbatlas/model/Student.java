@@ -33,6 +33,8 @@ public class Student {
 
     private LinkedHashMap<Subjects, LinkedList<Notes>> notes;
 
+    // private LinkedHashMap<Days, LinkedHashMap<lectureTime, Subjects>> timeTable;
+
     // Getting from User during Registraion
     private String studentName;
 

@@ -1,10 +1,12 @@
 package com.learning.mongodbatlas.mongodbatlas.model;
 
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.learning.mongodbatlas.mongodbatlas.enums.Days;
 import com.learning.mongodbatlas.mongodbatlas.enums.Subjects;
 
 import lombok.AllArgsConstructor;
@@ -24,4 +26,5 @@ public class Curriculum {
 
     private LinkedList<Subjects> subjects;
 
+    private LinkedHashMap<Days, LinkedHashMap<lectureTime, Subjects>> timeTable;
 }
