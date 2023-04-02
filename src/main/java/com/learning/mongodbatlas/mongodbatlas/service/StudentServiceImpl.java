@@ -1,5 +1,6 @@
 package com.learning.mongodbatlas.mongodbatlas.service;
 
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -135,29 +136,30 @@ public class StudentServiceImpl implements StudentService {
 
         Student student = studentRepository.findById(Id).get();
         LinkedHashMap<Subjects, LinkedList<Notes>> notesMap = student.getNotes();
-        System.out.println(notesMap);
+        Iterator<Notes> iterator = notesMap.get(subjects).iterator();
+        LinkedList<Notes> notesToAdd = new LinkedList<>();
 
         // add new notes to existing notes map
 
-        try {
-            notesMap.get(subjects).add(notes);
+        // check if notes for a particular subject exist for that day
 
-            // replace old notes with new in db
+        while (iterator.hasNext()) {
+            Notes note = iterator.next();
+            if (note.getDate().equals(notes.getDate())) {
+                note.setContent(notes.getContent());
+                note.setTitle(notes.getTitle());
+            } else {
+                notesToAdd.add(notes);
 
-            student.setNotes(notesMap);
-            studentRepository.save(student);
-
-            return HttpStatus.OK;
-        } catch (NullPointerException e) {
-
-            LinkedList<Notes> newNotesList = new LinkedList<>();
-            newNotesList.add(notes);
-            notesMap.put(subjects, newNotesList);
-            student.setNotes(notesMap);
-            studentRepository.save(student);
-
+            }
         }
-        return HttpStatus.NOT_FOUND;
+        notesMap.get(subjects).addAll(notesToAdd);
+
+        // replace old notes with new in db
+        student.setNotes(notesMap);
+        studentRepository.save(student);
+
+        return HttpStatus.OK;
 
     }
 
@@ -165,17 +167,23 @@ public class StudentServiceImpl implements StudentService {
     public HttpStatus deleteNotes(int Id, Subjects subjects, String date) {
 
         Student student = studentRepository.findById(Id).get();
+        LinkedList<Notes> notesList = student.getNotes().get(subjects);
         LinkedHashMap<Subjects, LinkedList<Notes>> notesMap = student.getNotes();
 
-        if (notesMap.get(subjects).element().getDate().equals(date)) {
-            System.out.println("_________________________________________________________");
-            System.out.println(notesMap.get(subjects).element());
-            notesMap.get(subjects).remove(notesMap.get(subjects).element());
-            student.setNotes(notesMap);
-            studentRepository.save(student);
+        Iterator<Notes> iterator = notesList.iterator();
+
+        while (iterator.hasNext()) {
+            Notes note = iterator.next();
+            if (date.equals(note.getDate())) {
+                iterator.remove();
+            }
         }
 
-        return HttpStatus.NOT_FOUND;
+        notesMap.put(subjects, notesList);
+        student.setNotes(notesMap);
+        studentRepository.save(student);
+
+        return HttpStatus.OK;
     }
 
 }
