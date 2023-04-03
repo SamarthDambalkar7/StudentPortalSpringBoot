@@ -143,8 +143,10 @@ public class StudentServiceImpl implements StudentService {
 
         // fetch old results of notes
 
+        boolean isPresent = false;
         Student student = studentRepository.findById(Id).get();
         LinkedHashMap<Subjects, LinkedList<Notes>> notesMap = student.getNotes();
+
         Iterator<Notes> iterator = notesMap.get(subjects).iterator();
         LinkedList<Notes> notesToAdd = new LinkedList<>();
 
@@ -152,15 +154,31 @@ public class StudentServiceImpl implements StudentService {
 
         // check if notes for a particular subject exist for that day
 
-        while (iterator.hasNext()) {
-            Notes note = iterator.next();
-            if (note.getDate().equals(notes.getDate())) {
-                note.setContent(notes.getContent());
-                note.setTitle(notes.getTitle());
-            } else {
+        if (iterator.hasNext() && !notes.getDate().equals("")) {
+            while (iterator.hasNext()) {
+                Notes note = iterator.next();
+
+                if (note.getDate().equals(notes.getDate())) {
+                    note.setContent(notes.getContent());
+                    note.setTitle(notes.getTitle());
+                    isPresent = true;
+                }
+            }
+            if (!isPresent) {
                 notesToAdd.add(notes);
             }
+        } else {
+            notesToAdd.add(notes);
         }
+
+        /* below code is partially correct */
+        // while (iterator.hasNext()) {
+        // Notes note = iterator.next();
+        // if (note.getDate().equals(notes.getDate())) {
+        // note.setContent(notes.getContent());
+        // note.setTitle(notes.getTitle());
+        // }
+        // }
         notesMap.get(subjects).addAll(notesToAdd);
 
         // replace old notes with new in db
