@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.learning.mongodbatlas.mongodbatlas.enums.Days;
 import com.learning.mongodbatlas.mongodbatlas.enums.StudentType;
 import com.learning.mongodbatlas.mongodbatlas.enums.Subjects;
 
@@ -33,7 +34,7 @@ public class Student {
 
     private LinkedHashMap<Subjects, LinkedList<Notes>> notes;
 
-    // private LinkedHashMap<Days, LinkedHashMap<lectureTime, Subjects>> timeTable;
+    private LinkedHashMap<Days, LinkedList<String>> timeTable;
 
     // Getting from User during Registraion
     private String studentName;

@@ -26,5 +26,5 @@ public class Curriculum {
 
     private LinkedList<Subjects> subjects;
 
-    private LinkedHashMap<Days, LinkedHashMap<lectureTime, Subjects>> timeTable;
+    private LinkedHashMap<Days, LinkedList<String>> timeTable;
 }

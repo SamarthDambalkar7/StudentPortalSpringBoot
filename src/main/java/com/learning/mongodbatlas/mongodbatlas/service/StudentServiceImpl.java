@@ -100,6 +100,10 @@ public class StudentServiceImpl implements StudentService {
             }
         }
 
+        // Set timetable for student according to std
+
+        student.setTimeTable(curriculumRepository.findById(student.getStd()).get().getTimeTable());
+
         // storing student with all properties to MongoDB
         studentRepository.save(student);
         return String.valueOf(student.getStudentId());

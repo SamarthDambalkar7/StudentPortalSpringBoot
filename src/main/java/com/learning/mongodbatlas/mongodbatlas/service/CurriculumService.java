@@ -7,12 +7,11 @@ import org.springframework.http.HttpStatus;
 
 import com.learning.mongodbatlas.mongodbatlas.enums.Days;
 import com.learning.mongodbatlas.mongodbatlas.enums.Subjects;
-import com.learning.mongodbatlas.mongodbatlas.model.lectureTime;
 
 public interface CurriculumService {
 
     HttpStatus addSubjectsByStd(int std, LinkedList<Subjects> subjects);
 
-    HttpStatus setTimeTable(int std, LinkedHashMap<Days, LinkedHashMap<lectureTime, Subjects>> info);
+    HttpStatus setTimeTable(int std, LinkedHashMap<Days, LinkedList<String>> info);
 
 }
