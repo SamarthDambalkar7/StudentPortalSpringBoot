@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.learning.mongodbatlas.mongodbatlas.enums.Days;
 import com.learning.mongodbatlas.mongodbatlas.enums.Subjects;
-import com.learning.mongodbatlas.mongodbatlas.model.lectureTime;
 import com.learning.mongodbatlas.mongodbatlas.service.CurriculumServiceImpl;
 
 @RestController
@@ -30,7 +29,7 @@ public class CurriculumController {
 
     @PostMapping("/addtimetablebystd")
     public HttpStatus addTimeTable(@RequestParam int std,
-            @RequestBody LinkedHashMap<Days, LinkedHashMap<lectureTime, Subjects>> info) {
+            @RequestBody LinkedHashMap<Days, LinkedList<String>> info) {
         return curriculumServiceImpl.setTimeTable(std, info);
     }
 
