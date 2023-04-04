@@ -102,7 +102,7 @@ public class StudentServiceImpl implements StudentService {
 
         // storing student with all properties to MongoDB
         studentRepository.save(student);
-        return "Student with StudentId:" + student.getStudentId() + " created successfully";
+        return String.valueOf(student.getStudentId());
 
     }
 
@@ -171,14 +171,6 @@ public class StudentServiceImpl implements StudentService {
             notesToAdd.add(notes);
         }
 
-        /* below code is partially correct */
-        // while (iterator.hasNext()) {
-        // Notes note = iterator.next();
-        // if (note.getDate().equals(notes.getDate())) {
-        // note.setContent(notes.getContent());
-        // note.setTitle(notes.getTitle());
-        // }
-        // }
         notesMap.get(subjects).addAll(notesToAdd);
 
         // replace old notes with new in db
